@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  mongo-container:
+    image: mongo:jammy
+    env_file:
+      - .env
+    ports:
+      - "27017:27017"
+    command: mongod

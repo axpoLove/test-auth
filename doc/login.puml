@@ -1,0 +1,15 @@
+@startuml
+axpol -> api : /login
+api -> crypto_service 
+crypto_service -> crypto_service
+note left
+генерит access_token, вшивая в него входящий guid
+генерит refresh токен, сохраняет его в базу данных
+с этим guid. Тем самым создает связь между текущим access и refresh токенами.
+Так как по условию задачи, мы можем обновить access токен, только тем refresh токеном
+который был выпущен вместе с ним
+endnote
+crypto_service -> api : returns refresh and access tokens
+api -> mongodb : saves both tokens
+api -> axpol : return refresh and access tokens
+@enduml
